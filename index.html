@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script
+      src="https://kit.fontawesome.com/8d7557c58b.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <!-- For using color-modes (dark and light themes) -->
+    <script src="/assets/js/color-modes.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" type="image/png" href="assets/img/inventory.png">
+    <style>
+      /*
+ * Dashboard
+ */
+      /*summary-cards*/
+      .card-title {
+        color: var(--color-text-secondary);
+        font-size: 0.8rem;
+      }
+
+      /*Action badges*/
+      .dashboard-action-badges {
+        background-color: var(--color-primary);
+      }
+      .system-overview p {
+        border-bottom: 1px solid var(--color-border);
+        padding: 6px 0;
+        color: var(--color-text-secondary);
+      }
+      .system-overview span {
+        color: var(--color-text-primary);
+      }
+
+      /*Action buttons*/
+      .btn-outline-primary {
+        --bs-btn-color: var(--color-text-secondary); /* #475569 slate */
+        --bs-btn-border-color: var(
+          --color-sidebar-text
+        ); /* #e2e8f0 light border */
+        --bs-btn-hover-bg: var(--color-sidebar-bg); /* #0f172a dark navy */
+        --bs-btn-hover-color: var(--color-text-inverse); /* #ffffff white */
+        --bs-btn-hover-border-color: var(--color-sidebar-bg); /* #0f172a */
+        --bs-btn-active-bg: var(
+          --color-sidebar-surface
+        ); /* #1e293b slightly lighter navy */
+        --bs-btn-active-border-color: var(--color-sidebar-surface);
+      }
+
+      .qa-new-product i,
+      .qa-new-PO i,
+      .qa-adjust i {
+        color: var(--color-text-secondary);
+        transition: color 0.15s;
+      }
+
+      .qa-new-product:hover i,
+      .qa-new-PO:hover i,
+      .qa-adjust:hover i {
+        color: var(--color-text-inverse);
+      }
+
+      /*view Reports buttons*/
+      .btn-warning-custom {
+        background-color: var(--color-warning) !important;
+        border: none;
+      }
+
+      .btn-warning-custom:hover,
+      .btn-warning-custom:focus,
+      .btn-warning-custom:active {
+        background-color: var(--color-warning-text) !important;
+      }
+
+      .btn-danger-custom {
+        background-color: var(--color-danger) !important;
+        border: none;
+      }
+
+      .btn-danger-custom:hover,
+      .btn-danger-custom:focus,
+      .btn-danger-custom:active {
+        background-color: var(--color-danger-text) !important;
+      }
+
+      [data-bs-theme="dark"] .btn-outline-primary {
+        --bs-btn-color: var(--color-text-secondary);
+        --bs-btn-border-color: var(--color-border);
+        --bs-btn-hover-bg: var(--color-surface-hover);
+        --bs-btn-hover-color: var(--color-primary);
+        --bs-btn-hover-border-color: var(--color-primary);
+        --bs-btn-active-bg: var(--color-surface);
+        --bs-btn-active-color: var(--color-primary);
+        --bs-btn-active-border-color: var(--color-primary);
+      }
+
+      [data-bs-theme="dark"] .qa-new-product:hover i,
+      [data-bs-theme="dark"] .qa-new-PO:hover i,
+      [data-bs-theme="dark"] .qa-adjust:hover i {
+        color: var(--color-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <main id="injected">
+      <div class="cards-container conatiner row justify-content-around p-3">
+        <div
+          class="card summary-card col-lg-2 col-md-5 col-sm-12 p-3 my-2 my-lg-0"
+        >
+          <p class="card-title">Total products</p>
+          <p class="products-number fw-bold fs-5 p-2"></p>
+        </div>
+        <div
+          class="card summary-card col-lg-2 col-md-5 col-sm-12 p-3 my-2 my-lg-0"
+        >
+          <p class="card-title">Low Stock Items</p>
+          <p
+            class="low-stock-number fw-bold fs-5 p-2"
+            style="color: var(--color-warning-text)"
+          ></p>
+          <button
+            class="btn btn-warning-custom text-white"
+            onclick="window.location.href = 'reports.html'"
+          >
+            View Report
+          </button>
+        </div>
+        <div
+          class="card summary-card col-lg-2 col-md-5 col-sm-12 p-3 my-2 my-lg-0"
+        >
+          <p class="card-title">Out of Stock</p>
+          <p
+            class="out-of-stock-number fw-bold fs-5 p-2"
+            style="color: var(--color-danger-text)"
+          ></p>
+          <button
+            class="btn btn-danger-custom text-white"
+            onclick="window.location.href = 'reports.html'"
+          >
+            View Report
+          </button>
+        </div>
+        <div
+          class="card summary-card col-lg-2 col-md-5 col-sm-12 p-3 my-2 my-lg-0"
+        >
+          <p class="card-title">Total Inventory Value</p>
+          <p class="inventory-value-number fw-bold fs-5 p-2"></p>
+        </div>
+      </div>
+
+      <div class="container row justify-content-around mx-auto mt-5">
+        <div
+          class="card col-lg-5 col-12 d-flex flex-column action-card my-2 p-0"
+        >
+          <p
+            class="dashboard-action-badges fw-bold fs-6 m-0 px-2 py-2 border rounded-top text-white"
+          >
+            Quick Actions
+          </p>
+          <div class="d-flex flex-column mt-3 align-items-center py-3">
+            <button
+              class="qa-new-product btn btn-outline-primary m-1 w-75"
+              onclick="window.location.href = 'products.html'"
+            >
+              <i class="fa-solid fa-circle-plus me-1"></i>Add new product
+            </button>
+            <button
+              class="qa-new-PO btn btn-outline-primary m-1 w-75"
+              onclick="window.location.href = 'orders.html'"
+            >
+              <i class="fa-solid fa-cart-arrow-down me-1"></i>Create Purchase
+              Order
+            </button>
+            <button
+              class="qa-adjust btn btn-outline-primary m-1 w-75"
+              onclick="window.location.href = 'adjustments.html'"
+            >
+              <i class="fa-solid fa-arrows-left-right me-1"></i>Adjust Stock
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="card col-lg-5 col-12 quick-actions-container d-flex flex-column action-card my-2 p-0"
+        >
+          <p
+            class="dashboard-action-badges fw-bold fs-6 m-0 px-2 py-2 border rounded-top text-white"
+          >
+            System overview
+          </p>
+          <p class="mx-3 mt-3">
+            <i
+              class="fa-regular fa-square-check me-1"
+              style="color: #475569"
+            ></i
+            >Categories: <span class="categories-number fw-bold"></span>
+          </p>
+          <p class="mx-3">
+            <i
+              class="fa-regular fa-square-check me-1"
+              style="color: #475569"
+            ></i
+            >Suppliers: <span class="suppliers-number fw-bold"></span>
+          </p>
+          <p class="mx-3">
+            <i
+              class="fa-regular fa-square-check me-1"
+              style="color: #475569"
+            ></i
+            >Purchase Orders:
+            <span class="purchase-orders-number fw-bold"></span>
+          </p>
+          <p class="mx-3">
+            <i
+              class="fa-regular fa-square-check me-1"
+              style="color: #475569"
+            ></i
+            >Stock Adjustments:
+            <span class="stock-adjustments-number fw-bold"></span>
+          </p>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/navbar.js" type="module"></script>
+    <script src="./js/dashboard.js" type="module"></script>
+  </body>
+</html>
