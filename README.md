@@ -300,7 +300,3 @@ Open the browser's **DevTools → Application → Local Storage**, select the or
 3. Make your changes and test across pages
 4. Commit with a clear message: `git commit -m "feat: add export to CSV on reports page"`
 5. Push and open a Pull Request
-
-
-
-# inventory-management-system
